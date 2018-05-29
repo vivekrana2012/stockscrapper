@@ -1,0 +1,16 @@
+{
+  "name": "stockscrapper-scripts",
+  "version": "1.0.0",
+  "description": "A node for scripts.",
+  "main": "get_data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongodb": "^2.2.33",
+    "csvtojson": "2.0.0",
+    "request": "^2.81.0"
+  },
+  "author": "vivek rana",
+  "license": "ISC"
+}
