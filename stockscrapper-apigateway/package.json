@@ -1,0 +1,17 @@
+{
+  "name": "stockscrapper-apigateway",
+  "version": "1.0.0",
+  "description": "API gateway that will serve requests for our application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "4.16.3",
+    "nodemon": "*",
+    "mongodb": "^2.2.33",
+    "body-parser": "*"
+  },
+  "author": "vivek rana",
+  "license": "ISC"
+}
