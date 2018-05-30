@@ -1,0 +1,16 @@
+{
+  "name": "stockscrapper-discovery",
+  "version": "1.0.0",
+  "description": "Discovery server to keep track of the status of the services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "4.16.3",
+    "body-parser": "*",
+    "nodemon": "*"
+  },
+  "author": "vivek rana",
+  "license": "ISC"
+}
