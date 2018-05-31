@@ -3,16 +3,12 @@ app.controller("appController", function($scope, $http){
   $scope.searchValue = "";
   $scope.availableTickers = ["TCS"];
 
-  $http.get('http://localhost:3001/api/events/tickers')
+  var sourceData = $http.get('http://localhost:3000/api/events/tickers')
     .then(function(result){
-      var tickers = [];
-
-      for(item in result){
-        tickers.push(item["Security Id"]);
-      }
-
-      $('#search').autocomplete({source: tickers});
+      return result;
     });
+
+  $('#search').autocomplete({source: ['TCS', 'INFY']});
 
   createFixedCharts();
 

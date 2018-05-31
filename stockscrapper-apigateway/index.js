@@ -2,10 +2,8 @@
   Get libraries
 */
 var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
+var router = require('./routes/events');
 
 var app = express();
 
@@ -18,6 +16,7 @@ var port = 3000;
   Map client Folder for angular files
 */
 app.use(express.static(__dirname + '/client'));
+app.use('/api', router);
 
 app.listen(port, function(){
   console.log('Index server started on port: '+port);
