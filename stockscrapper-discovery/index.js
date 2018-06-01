@@ -80,7 +80,7 @@ app.get('/discovery/api/events/:eventName', function(request, response){
   const index = serviceNames.indexOf(serviceName);
 
   if(index === -1){
-    response.status(204).send({'status': 'Not Available'});
+    response.status(502).send({'status': 'Not Available'});
     return;
   }else {
     const service = services[serviceName];
