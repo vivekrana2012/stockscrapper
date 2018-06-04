@@ -6,6 +6,9 @@ const mongoClient = require('mongodb').MongoClient;
 const router = express.Router();
 var db;
 
+const mongdb = require('../dbHelper/dbHelper');
+console.log(mongdb());
+
 /*
   Mongo configuration.
 */
