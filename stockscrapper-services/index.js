@@ -35,10 +35,10 @@ setInterval(() => {
   requestHttp(options, (error, response, body) => {
     if(response && response.statusCode === 200)
       console.log('Successfully Pinged Discovery Server at '+new Date()+' hours.');
-    else if(response.statusCode === 400){
+    else if(response && response.statusCode === 400){
       console.log('Failed to register with discovery server: '+body);
     }else{
-      console.log('Failed to register with discovery server: '+body);
+      console.log('Failed to register with discovery server: '+'due to server being down.');
     }
   });
 } , 1000);
