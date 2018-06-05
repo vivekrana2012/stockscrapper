@@ -6,15 +6,16 @@ const mongoClient = require('mongodb').MongoClient;
 const router = express.Router();
 const client = new mongoClient();
 var db;
-var connectionRetry = setInterval(connectWithMongo, 1000);
 
 /*
   Event to check for mongo status changes, if type is 'Unknown' start trying again.
 */
 client.on('serverDescriptionChanged', function(event) {
-  console.log('received serverDescriptionChanged: '+ event['newDescription']['type']);
+  // console.log('received serverDescriptionChanged: '+ event['newDescription']['type']);
   if(event['newDescription']['type'] === 'Unknown'){
-    connectionRetry = setInterval(connectWithMongo, 1000);
+    console.log('DB just went down.');
+  }else{
+    console.log('DB is Working fine.');
   }
 });
 
@@ -22,22 +23,31 @@ client.on('serverDescriptionChanged', function(event) {
   Mongo configuration.
 */
 const options = {
-  poolSize: 10
+  poolSize: 10,
+  autoReconnect: true,
+  reconnectTries: Number.MAX_VALUE,
+  reconnectInterval: 1000,
+  bufferMaxEntries: 5
 };
+
+/*
+  Connection interval for initial connection after which the reconnectTries will take care.
+*/
+var connection = setInterval(connectWithMongo, 2000);
 
 /*
   Connect to mongodb and assign to global variable.
 */
 function connectWithMongo(){
-  client.connect('mongodb://localhost:27017/stockscrapper', options, (error, mongodb) => {
-    if(error){
-      console.log('DB is Unavailable: '+error);
-      db=null;
-    }else{
-      db = mongodb;
-      clearInterval(connectionRetry);
-    }
-  });
+    client.connect('mongodb://localhost:27017/stockscrapper', options, (error, mongodb) => {
+      if(error){
+        console.log('DB is Unavailable: '+error);
+        db=null;
+      }else{
+        db = mongodb;
+        clearInterval(connection);
+      }
+    });
 }
 
 /*
