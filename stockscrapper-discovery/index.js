@@ -95,7 +95,7 @@ app.get('/discovery/api/events/:eventName', function(request, response){
 setInterval(() => {
   for(var counter = 0; counter < serviceNames.length; counter++){
     const item = services[serviceNames[counter]];
-    if(new Date() - new Date(item['timestamp']) > 1000){
+    if(new Date() - new Date(item['timestamp']) > 2000){
       console.log(serviceNames[counter]+' just went down @ '+new Date());
       delete services[serviceNames[counter]];
       serviceNames.splice(counter, 1);

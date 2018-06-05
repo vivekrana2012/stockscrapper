@@ -20,7 +20,7 @@ router.get('/events/tickers', function(request, response){
             result.push(item['Security Id']);
           });
         }
-        console.log(result);
+        // console.log(result);
         response.send(result);
       });
     }

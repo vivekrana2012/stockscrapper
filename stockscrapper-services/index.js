@@ -43,7 +43,7 @@ setInterval(() => {
       console.log('Failed to register with discovery server: '+'due to server being down.');
     }
   });
-} , 1000);
+} , 2000);
 
 /*
   started server on port.
