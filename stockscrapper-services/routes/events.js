@@ -32,6 +32,7 @@ const options = {
 
 /*
   Connection interval for initial connection after which the reconnectTries will take care.
+  Minimum interval is 2000, for 1000 mongo opens multiple connections.
 */
 var connection = setInterval(connectWithMongo, 2000);
 

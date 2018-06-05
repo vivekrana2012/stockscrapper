@@ -93,14 +93,15 @@ app.get('/discovery/api/events/:eventName', function(request, response){
   Every 1000ms iterate in the service records and clear non responding services.
 */
 setInterval(() => {
-  for(var counter = 0; counter < services.length; counter++){
+  for(var counter = 0; counter < serviceNames.length; counter++){
     const item = services[serviceNames[counter]];
     if(new Date() - new Date(item['timestamp']) > 1000){
+      console.log(serviceNames[counter]+' just went down @ '+new Date());
       delete services[serviceNames[counter]];
       serviceNames.splice(counter, 1);
     }
   }
-}, 1000);
+}, 2000);
 
 /*
   Starting the server on port.

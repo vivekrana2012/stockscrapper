@@ -26,15 +26,17 @@ setInterval(() => {
     uri: 'http://localhost:5000/discovery/',
     method: 'POST',
     json: true,
-    body: { "name": "events",
+    body: { "name": "tickers",
 	          "mapping": "/api/events/tickers",
 	          "host": "127.0.0.1",
 	          "port": port
             }
   };
   requestHttp(options, (error, response, body) => {
-    if(response && response.statusCode === 200)
+    if(response && response.statusCode === 200){
       console.log('Successfully Pinged Discovery Server at '+new Date()+' hours.');
+      console.log(response.body);
+    }
     else if(response && response.statusCode === 400){
       console.log('Failed to register with discovery server: '+body);
     }else{
