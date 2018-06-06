@@ -2,13 +2,28 @@ var app = angular.module("app" , []);
 app.controller("appController", function($scope, $http){
   $scope.searchValue = "";
 
-  $('#search').autocomplete({source: function(request, response){
-    $http.get('http://localhost:3000/api/events/tickers')
-      .then(function(result){
-        $scope.availableTickers = result.data;
-        response(result.data);
-      });
-  }});
+  $(function() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/api/events/tickers',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function(response) {
+                $('#search').autocomplete({source: response.data});
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+  });
+
+  // $('#search').autocomplete({source: function(request, response){
+  //   $http.get('http://localhost:3000/api/events/tickers')
+  //     .then(function(result){
+  //       $scope.availableTickers = result.data;
+  //       response(result.data);
+  //     });
+  // }});
 
   createFixedCharts();
 
