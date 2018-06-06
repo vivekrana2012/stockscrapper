@@ -9,7 +9,7 @@ app.controller("appController", function($scope, $http){
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function(response) {
-                $('#search').autocomplete({source: response.data});
+                $('#search').autocomplete({source: response});
             },
             error: function(error) {
                 console.log(error);

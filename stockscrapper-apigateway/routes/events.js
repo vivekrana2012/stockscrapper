@@ -20,19 +20,13 @@ router.get('/events/tickers', function(request, response){
         }else{
           body.forEach(function(item){
             result.push(item['Security Id']);
-            response.send(result);
-            return;
           });
+          response.send(result);
+          return;
         }
-        response.status(500).send({'status': 'Oops! Something went wrong.'});
-        return;
       });
     }
-    response.status(500).send({'status': 'Oops! Something went wrong.'});
-    return;
   });
-  response.status(500).send({'status': 'Oops! Something went wrong.'});
-  return;
 });
 
 module.exports = router;
