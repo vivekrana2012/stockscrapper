@@ -17,14 +17,6 @@ app.controller("appController", function($scope, $http){
         });
   });
 
-  // $('#search').autocomplete({source: function(request, response){
-  //   $http.get('http://localhost:3000/api/events/tickers')
-  //     .then(function(result){
-  //       $scope.availableTickers = result.data;
-  //       response(result.data);
-  //     });
-  // }});
-
   createFixedCharts();
 
   $scope.keydown = function(e){
