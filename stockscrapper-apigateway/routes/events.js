@@ -7,24 +7,32 @@ router.get('/events', function(request, response, next){
 });
 
 router.get('/events/tickers', function(request, response){
-  requestHttp('http://localhost:5000/discovery/api/events/tickers', {json:true}, (error, responseHttp, body) => {
+  requestHttp('http://localhost:5000/discovery/api/events/tickers', {json:true}, (error, responseDiscovery, body) => {
     if(error){
-      responseHttp.send();
+      response.status(502).send({'status': 'discovery not found.'});
+      return;
     }else{
-      requestHttp('http://'+body, { json:true }, function(error, responseHttp, body){
+      requestHttp('http://'+body, { json:true }, function(error, responseService, body){
         var result = [];
         if (error) {
-          console.log(error);
+          response.status(503).send({'status': 'Service not found.'});
+          return;
         }else{
           body.forEach(function(item){
             result.push(item['Security Id']);
+            response.send(result);
+            return;
           });
         }
-        // console.log(result);
-        response.send(result);
+        response.status(500).send({'status': 'Oops! Something went wrong.'});
+        return;
       });
     }
+    response.status(500).send({'status': 'Oops! Something went wrong.'});
+    return;
   });
+  response.status(500).send({'status': 'Oops! Something went wrong.'});
+  return;
 });
 
 module.exports = router;
