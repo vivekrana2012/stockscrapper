@@ -1,14 +1,14 @@
 var app = angular.module("app" , []);
 app.controller("appController", function($scope, $http){
   $scope.searchValue = "";
-  $scope.availableTickers = ["TCS"];
 
-  var sourceData = $http.get('http://localhost:3000/api/events/tickers')
-    .then(function(result){
-      return result;
-    });
-
-  $('#search').autocomplete({source: ['TCS', 'INFY']});
+  $('#search').autocomplete({source: function(request, response){
+    $http.get('http://localhost:3000/api/events/tickers')
+      .then(function(result){
+        $scope.availableTickers = result.data;
+        response(result.data);
+      });
+  }});
 
   createFixedCharts();
 
